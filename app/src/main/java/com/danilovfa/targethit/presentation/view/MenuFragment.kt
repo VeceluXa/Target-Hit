@@ -2,40 +2,16 @@ package com.danilovfa.targethit.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.danilovfa.targethit.R
-import com.danilovfa.targethit.databinding.FragmentFirstBinding
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.danilovfa.targethit.databinding.FragmentMenuBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class MenuFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
+    private val binding: FragmentMenuBinding by viewBinding(createMethod = CreateMethod.INFLATE)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
