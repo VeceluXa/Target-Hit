@@ -1,4 +1,4 @@
-package com.danilovfa.targethit
+package com.danilovfa.targethit.presentation.view
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.danilovfa.targethit.R
 import com.danilovfa.targethit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
