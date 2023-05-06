@@ -6,7 +6,9 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentMenuBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
 
     private val binding: FragmentMenuBinding by viewBinding(createMethod = CreateMethod.INFLATE)

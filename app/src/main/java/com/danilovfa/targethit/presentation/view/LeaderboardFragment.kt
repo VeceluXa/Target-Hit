@@ -8,8 +8,9 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentLeaderboardBinding
 import com.danilovfa.targethit.presentation.viewmodel.LeaderboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LeaderboardFragment : Fragment() {
 
     private val binding: FragmentLeaderboardBinding by viewBinding(CreateMethod.INFLATE)
