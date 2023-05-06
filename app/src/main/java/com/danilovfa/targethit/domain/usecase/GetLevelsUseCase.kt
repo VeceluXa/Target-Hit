@@ -4,9 +4,10 @@ import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.repository.LevelRepository
 import javax.inject.Inject
 
-class GetLevelByIdUseCase @Inject constructor(
-    private val levelRepository: LevelRepository) {
-    suspend fun execute(id: Int): Level {
-        return levelRepository.getLevelById(id)
+class GetLevelsUseCase @Inject constructor(
+    private val levelRepository: LevelRepository
+) {
+    suspend fun execute(): List<Level> {
+        return levelRepository.getLevels()
     }
 }

@@ -7,7 +7,11 @@ import javax.inject.Inject
 
 class LevelRepositoryImpl @Inject constructor(
     levelsDao: LevelsDao): LevelRepository {
-    override suspend fun getLevel(id: Int): Level {
+    override suspend fun getLevelById(id: Int): Level {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getLevels(): List<Level> {
         TODO("Not yet implemented")
     }
 

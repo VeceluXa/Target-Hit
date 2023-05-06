@@ -3,10 +3,7 @@ package com.danilovfa.targethit.domain.di
 import androidx.room.PrimaryKey
 import com.danilovfa.targethit.domain.repository.LeaderboardRepository
 import com.danilovfa.targethit.domain.repository.LevelRepository
-import com.danilovfa.targethit.domain.usecase.GetLeaderboardUseCase
-import com.danilovfa.targethit.domain.usecase.GetLevelByIdUseCase
-import com.danilovfa.targethit.domain.usecase.SetLevelCompletedByIdUseCase
-import com.danilovfa.targethit.domain.usecase.SetScoreUseCase
+import com.danilovfa.targethit.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,6 +20,11 @@ class DomainModule {
     @Provides
     fun provideGetLevelByIdUseCase(levelRepository: LevelRepository): GetLevelByIdUseCase {
         return GetLevelByIdUseCase(levelRepository)
+    }
+
+    @Provides
+    fun provideGetLevelsUseCase(levelRepository: LevelRepository): GetLevelsUseCase {
+        return GetLevelsUseCase(levelRepository)
     }
 
     @Provides
