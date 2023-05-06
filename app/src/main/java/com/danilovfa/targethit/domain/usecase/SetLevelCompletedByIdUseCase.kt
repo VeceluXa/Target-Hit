@@ -1,8 +1,10 @@
 package com.danilovfa.targethit.domain.usecase
 
 import com.danilovfa.targethit.domain.repository.LevelRepository
+import javax.inject.Inject
 
-class SetLevelCompletedById(private val levelRepository: LevelRepository) {
+class SetLevelCompletedByIdUseCase @Inject constructor(
+    private val levelRepository: LevelRepository) {
     fun execute(id: Int) {
         levelRepository.setComplete(id)
     }

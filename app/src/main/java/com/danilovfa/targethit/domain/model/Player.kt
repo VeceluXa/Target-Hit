@@ -1,3 +1,6 @@
 package com.danilovfa.targethit.domain.model
 
-data class Player()
+data class Player(
+    val id: Int,
+    val name: String
+)
