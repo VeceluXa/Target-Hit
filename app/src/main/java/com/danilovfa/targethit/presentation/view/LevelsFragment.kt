@@ -17,7 +17,9 @@ import com.danilovfa.targethit.databinding.FragmentLevelsBinding
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
+import com.danilovfa.targethit.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,7 +43,15 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+            binding.apply {
+                progressBar.visibility = View.GONE
+                errorTextView.visibility = View.VISIBLE
+                errorTextView.text = exception.message
+            }
+        }
+
+        lifecycleScope.launch(coroutineExceptionHandler) {
             val levels = mutableListOf<Int>()
             withContext(Dispatchers.IO) {
                 levels += viewModel.getLevels()

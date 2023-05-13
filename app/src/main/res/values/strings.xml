@@ -4,4 +4,5 @@
     <string name="menu">Menu</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="levels_item_text">Level</string>
+    <string name="levels_error_default">An error occurred while retrieving levels. Please try again.</string>
 </resources>
