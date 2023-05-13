@@ -3,11 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/menuFragment">
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/menuFragment"
         android:name="com.danilovfa.targethit.presentation.view.MenuFragment"
-        android:label="@string/menu"
-        tools:layout="@layout/fragment_menu"/>
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_levelsFragment"
+            app:destination="@id/levelsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/levelsFragment"
+        android:name="com.danilovfa.targethit.presentation.view.LevelsFragment"
+        android:label="Select level"
+        tools:layout="@layout/fragment_levels" >
+        <action
+            android:id="@+id/action_levelsFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_levelsFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
+        <argument
+            android:name="destination"
+            app:argType="com.danilovfa.targethit.presentation.model.LevelDestinations" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.danilovfa.targethit.presentation.view.GameFragment"
+        android:label="Game"
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="level"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.danilovfa.targethit.presentation.view.LeaderboardFragment"
+        android:label="Leaderboard"
+        tools:layout="@layout/fragment_leaderboard" >
+        <argument
+            android:name="level"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.danilovfa.targethit.presentation.view.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
