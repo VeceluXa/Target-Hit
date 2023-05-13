@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.danilovfa.targethit.R
 import com.danilovfa.targethit.databinding.FragmentGameBinding
 import com.danilovfa.targethit.presentation.viewmodel.GameViewModel
 import dagger.hilt.android.AndroidEntryPoint

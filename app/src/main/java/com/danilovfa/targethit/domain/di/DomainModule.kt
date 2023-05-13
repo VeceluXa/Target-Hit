@@ -1,6 +1,5 @@
 package com.danilovfa.targethit.domain.di
 
-import androidx.room.PrimaryKey
 import com.danilovfa.targethit.domain.repository.LeaderboardRepository
 import com.danilovfa.targethit.domain.repository.LevelRepository
 import com.danilovfa.targethit.domain.usecase.*
