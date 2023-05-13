@@ -1,0 +1,10 @@
+
+<resources>
+    <attr name="colorPrimary" format="color"/>
+    <attr name="colorSecondary" format="color"/>
+    <attr name="colorHighlight" format="color" />
+    <attr name="colorOnHighlight" format="color" />
+    <attr name="colorHighlightContainer" format="color" />
+    <attr name="colorOnHighlightContainer" format="color" />
+    <attr name="harmonizeHighlight" format="boolean" />
+</resources>

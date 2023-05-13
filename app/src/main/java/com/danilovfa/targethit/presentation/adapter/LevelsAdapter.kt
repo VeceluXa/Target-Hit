@@ -1,6 +1,8 @@
 package com.danilovfa.targethit.presentation.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.R
 import com.danilovfa.targethit.databinding.LevelsItemBinding
 import com.danilovfa.targethit.domain.model.Level
+import com.google.android.material.color.MaterialColors
 
-class LevelsAdapter(private val context: Context, private val levels: List<Level>):
+class LevelsAdapter(private val context: Context, private val levels: List<Level>) :
     RecyclerView.Adapter<LevelsAdapter.LevelViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -29,7 +32,7 @@ class LevelsAdapter(private val context: Context, private val levels: List<Level
         return levels.size
     }
 
-    inner class LevelViewHolder(item: View): ViewHolder(item) {
+    inner class LevelViewHolder(item: View) : ViewHolder(item) {
         private val binding: LevelsItemBinding by viewBinding()
 
         fun bind(id: Int) {
@@ -39,12 +42,14 @@ class LevelsAdapter(private val context: Context, private val levels: List<Level
                 setOnClickListener {
                     onItemclickListener?.onItemClick(id)
                 }
-            }
-
-            if (levels[id].isCompleted) {
-                binding.button.backgroundTintList = context.getColorStateList(androidx.appcompat.R.color.material_blue_grey_800)
+                setBackgroundColor(getColor(id))
             }
         }
+
+        private fun getColor(id: Int): Int = if (levels[id].isCompleted)
+            MaterialColors.getColor(context, R.attr.colorSecondary, Color.BLACK)
+        else
+            MaterialColors.getColor(context, R.attr.colorPrimary, Color.BLACK)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
