@@ -44,11 +44,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-            binding.apply {
-                progressBar.visibility = View.GONE
-                errorTextView.visibility = View.VISIBLE
-                errorTextView.text = exception.message
-            }
+            setError(exception.message)
         }
 
         lifecycleScope.launch(coroutineExceptionHandler) {
@@ -79,6 +75,15 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         binding.levelsRecyclerView.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun setError(message: String?) {
+        binding.apply {
+            progressBar.visibility = View.GONE
+            errorTextView.visibility = View.VISIBLE
+            if (message != null && message != "")
+                errorTextView.text = message
         }
     }
 
