@@ -19,6 +19,13 @@ class GameFragment : Fragment() {
     private val binding: FragmentGameBinding by viewBinding(CreateMethod.INFLATE)
     private val viewmodel: GameViewModel by viewModels()
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
