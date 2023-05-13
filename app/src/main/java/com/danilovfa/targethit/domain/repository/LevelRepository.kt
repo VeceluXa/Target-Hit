@@ -4,6 +4,6 @@ import com.danilovfa.targethit.domain.model.Level
 
 interface LevelRepository {
     suspend fun getLevelById(id: Int): Level
-    suspend fun getLevels(): List<Level>
+    suspend fun getLevels(): List<Int>
     fun setComplete(id: Int)
 }
