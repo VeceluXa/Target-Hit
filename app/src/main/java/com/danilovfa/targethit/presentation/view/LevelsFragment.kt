@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentLevelsBinding
+import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
@@ -26,6 +27,8 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
+
+    // TODO Add distinctions between completed levels and not
 
     private val binding: FragmentLevelsBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: LevelsViewModel by viewModels()
@@ -48,7 +51,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
 
         lifecycleScope.launch(coroutineExceptionHandler) {
-            val levels = mutableListOf<Int>()
+            val levels = mutableListOf<Level>()
             withContext(Dispatchers.IO) {
                 levels += viewModel.getLevels()
             }
@@ -57,7 +60,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
     }
 
-    private fun drawLevels(levels: List<Int>) {
+    private fun drawLevels(levels: List<Level>) {
         setVisibility()
         setAdapter(levels)
     }
@@ -69,7 +72,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
     }
 
-    private fun setAdapter(levels: List<Int>) {
+    private fun setAdapter(levels: List<Level>) {
         val myAdapter = LevelsAdapter(requireContext(), levels)
         myAdapter.setOnItemClickListener(this)
         binding.levelsRecyclerView.apply {

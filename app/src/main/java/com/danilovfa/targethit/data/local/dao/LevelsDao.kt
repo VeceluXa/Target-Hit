@@ -11,8 +11,8 @@ interface LevelsDao {
     @Query("SELECT * FROM levels WHERE id = :id")
     suspend fun getLevel(id: Int): LevelEntity
 
-    @Query("SELECT id FROM levels")
-    suspend fun getLevelsIndices(): List<Int>
+    @Query("SELECT * FROM levels")
+    suspend fun getLevels(): List<LevelEntity>
 
     @Query("UPDATE levels SET isCompleted = true WHERE id = :id")
     fun setLevelCompleted(id: Int)

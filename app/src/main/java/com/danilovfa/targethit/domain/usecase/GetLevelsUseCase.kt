@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetLevelsUseCase @Inject constructor(
     private val levelRepository: LevelRepository
 ) {
-    suspend fun execute(): List<Int> {
+    suspend fun execute(): List<Level> {
         return levelRepository.getLevels()
     }
 }
