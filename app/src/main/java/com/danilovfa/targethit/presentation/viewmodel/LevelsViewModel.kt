@@ -10,7 +10,7 @@ import javax.inject.Inject
 class LevelsViewModel @Inject constructor(
     private val getLevelsUseCase: GetLevelsUseCase
 ): ViewModel() {
-    suspend fun getLevels(): List<Level> {
+    suspend fun getLevels(): List<Int> {
         return getLevelsUseCase.execute()
     }
 }

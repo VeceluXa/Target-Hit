@@ -1,6 +1,8 @@
 package com.danilovfa.targethit.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.danilovfa.targethit.data.local.model.LevelEntity
 
@@ -18,5 +20,6 @@ interface LevelsDao {
     @Query("SELECT isCompleted FROM levels WHERE id = :id")
     fun isCompleted(id: Int): Boolean
 
-    // TODO Add query to return levels indices to optimize recyclerview drawing time
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun addRow(level: LevelEntity)
 }
