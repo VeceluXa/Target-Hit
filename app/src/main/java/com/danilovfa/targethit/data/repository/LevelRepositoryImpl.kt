@@ -10,7 +10,8 @@ class LevelRepositoryImpl @Inject constructor(
     private val levelsDao: LevelsDao): LevelRepository {
     val levelMapper = LevelEntityMapper()
     override suspend fun getLevelById(id: Int): Level {
-        TODO("Not yet implemented")
+        val entity = levelsDao.getLevel(id)
+        return levelMapper.fromEntity(entity)
     }
 
     override suspend fun getLevels(): List<Level> {
