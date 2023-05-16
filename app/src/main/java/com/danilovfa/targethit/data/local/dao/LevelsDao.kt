@@ -15,11 +15,11 @@ interface LevelsDao {
     suspend fun getLevels(): List<LevelEntity>
 
     @Query("UPDATE levels SET isCompleted = true WHERE id = :id")
-    fun setLevelCompleted(id: Int)
+    suspend fun setLevelCompleted(id: Int)
 
     @Query("SELECT isCompleted FROM levels WHERE id = :id")
     fun isCompleted(id: Int): Boolean
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun addRow(level: LevelEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addRow(level: LevelEntity)
 }

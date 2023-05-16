@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class SetLevelCompletedByIdUseCase @Inject constructor(
     private val levelRepository: LevelRepository) {
-    fun execute(id: Int) {
+    suspend fun execute(id: Int) {
         levelRepository.setComplete(id)
     }
 }

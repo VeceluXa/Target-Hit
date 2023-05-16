@@ -1,6 +1,8 @@
 package com.danilovfa.targethit.data.repository
 
 import com.danilovfa.targethit.data.local.dao.LevelsDao
+import com.danilovfa.targethit.data.local.model.CoordinateEntity
+import com.danilovfa.targethit.data.local.model.LevelEntity
 import com.danilovfa.targethit.data.mapper.LevelEntityMapper
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.repository.LevelRepository
@@ -15,12 +17,24 @@ class LevelRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLevels(): List<Level> {
+        levelsDao.addRow(LevelEntity(
+            0,
+            listOf(CoordinateEntity(54, 120, 0),
+                CoordinateEntity(500, 324, 5000),
+                CoordinateEntity(-1, -1, 10000)),
+            true
+        ))
+        levelsDao.addRow(LevelEntity(
+            1,
+            listOf(),
+            false
+        ))
         return levelsDao.getLevels().map { entity ->
             levelMapper.fromEntity(entity)
         }
     }
 
-    override fun setComplete(id: Int) {
-        TODO("Not yet implemented")
+    override suspend fun setComplete(id: Int) {
+        levelsDao.setLevelCompleted(id)
     }
 }

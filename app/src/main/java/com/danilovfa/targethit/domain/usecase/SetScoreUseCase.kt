@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class SetScoreUseCase @Inject constructor(
     private val leaderboardRepository: LeaderboardRepository) {
-    fun execute(score: Score) {
+    suspend fun execute(score: Score) {
         leaderboardRepository.setScore(score)
     }
 }

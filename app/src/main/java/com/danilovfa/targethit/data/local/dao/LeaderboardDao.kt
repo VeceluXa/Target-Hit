@@ -11,7 +11,7 @@ import com.danilovfa.targethit.utils.Constants.Companion.LEADERBOARD_SIZE
     interface LeaderboardDao {
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun setScore(score: ScoreEntity)
+        suspend fun setScore(score: ScoreEntity)
 
         @Query("SELECT * FROM leaderboard ORDER BY score DESC LIMIT $LEADERBOARD_SIZE")
         suspend fun getTopScores(): List<ScoreEntity>
