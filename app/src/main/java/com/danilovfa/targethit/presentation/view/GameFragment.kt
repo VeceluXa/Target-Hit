@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -17,6 +18,10 @@ import com.danilovfa.targethit.R
 import com.danilovfa.targethit.databinding.FragmentGameBinding
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
+import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
+import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
+import com.danilovfa.targethit.presentation.mapper.ScoreArgsMapper
+import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.viewmodel.GameViewModel
 import com.danilovfa.targethit.utils.Constants.Companion.STOPWATCH_UPDATE_TIME
 import com.danilovfa.targethit.utils.TAG
@@ -25,6 +30,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class GameFragment : Fragment() {
@@ -68,7 +74,7 @@ class GameFragment : Fragment() {
             if (level != null) {
                 viewModel.level = level
                 targets += level!!.targets
-                startGame(level!!)
+                startGame()
             } else
                 throw Exception("Error occurred while retrieving level data.")
         }
@@ -83,8 +89,8 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun startGame(level: Level) {
-        gameFieldView = GameFieldView(requireContext(), level)
+    private fun startGame() {
+        gameFieldView = GameFieldView(requireContext())
 
         startObservers()
         viewModel.startTimer()
@@ -94,7 +100,6 @@ class GameFragment : Fragment() {
             textScore.text = "0"
             textTime.text = "0.00"
             gameFieldLayout.addView(gameFieldView)
-            gameFieldView.startGame()
         }
     }
 
@@ -102,6 +107,16 @@ class GameFragment : Fragment() {
         stopObservers()
         viewModel.finishGame()
         Log.d(TAG, "finishGame")
+        val coordinateArgsMapper = CoordinateArgsMapper()
+        val action = GameFragmentDirections.actionGameFragmentToVictoryFragment(ScoreArgs(
+            levelId = args.level,
+            score = viewModel.score.value ?: 0,
+            date = LocalDateTime.now().toString(),
+            log = viewModel.gameLog.map { coordinate ->
+                coordinateArgsMapper.fromDomain(coordinate)
+            }
+        ))
+        findNavController().navigate(action)
     }
 
     private fun startObservers() {
@@ -132,6 +147,12 @@ class GameFragment : Fragment() {
         if (gameFieldView.isTargetHit()) {
             Log.d(TAG, "startObservers: Hit")
             viewModel.updateScore()
+            val coordinateMapper = CoordinateMapper(gameFieldView.width, gameFieldView.height)
+            viewModel.updateLog(coordinateMapper.fromView(Coordinate(
+                x = gameFieldView.crosshairX,
+                y = gameFieldView.crosshairY,
+                t = milliseconds.toInt()
+            )))
         }
 
         if (targets.size > 1 && milliseconds >= targets[0].t) {
