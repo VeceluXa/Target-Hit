@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.model
+package com.danilovfa.targethit.presentation.mapper
 
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.utils.Constants.Companion.DOMAIN_GAME_FIELD_HEIGHT
