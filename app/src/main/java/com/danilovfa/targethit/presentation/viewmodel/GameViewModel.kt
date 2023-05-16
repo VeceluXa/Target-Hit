@@ -5,6 +5,7 @@ import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.model.Score
 import com.danilovfa.targethit.domain.usecase.*
+import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
 import com.danilovfa.targethit.utils.Constants.Companion.SCORE_UPDATE_VALUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,8 @@ class GameViewModel @Inject constructor(
     private val startStopwatchUseCase: StartStopwatchUseCase,
     private val pauseStopWatchUseCase: PauseStopWatchUseCase
 ): ViewModel() {
-    private val gameLog = mutableListOf<Coordinate>()
+    private var _gameLog = mutableListOf<Coordinate>()
+    val gameLog get() = _gameLog.toList()
 
     private val _milliseconds = MutableLiveData(0L)
     val milliseconds: LiveData<Long> get() = _milliseconds
@@ -66,7 +68,7 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateLog(coordinate: Coordinate) {
-        gameLog.add(coordinate)
+        _gameLog.add(coordinate)
     }
 
     fun updateScore() {
