@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.data.mapper
+package com.danilovfa.targethit.utils
 
 interface Mapper<Entity, Domain> {
     fun fromEntity(entity: Entity): Domain

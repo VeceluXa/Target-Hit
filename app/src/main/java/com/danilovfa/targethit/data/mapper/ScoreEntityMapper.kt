@@ -2,6 +2,7 @@ package com.danilovfa.targethit.data.mapper
 
 import com.danilovfa.targethit.data.local.model.ScoreEntity
 import com.danilovfa.targethit.domain.model.Score
+import com.danilovfa.targethit.utils.Mapper
 
 class ScoreEntityMapper: Mapper<ScoreEntity, Score> {
     val coordinateEntityMapper = CoordinateEntityMapper()

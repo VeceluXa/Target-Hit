@@ -2,6 +2,7 @@ package com.danilovfa.targethit.data.mapper
 
 import com.danilovfa.targethit.data.local.model.CoordinateEntity
 import com.danilovfa.targethit.domain.model.Coordinate
+import com.danilovfa.targethit.utils.Mapper
 
 class CoordinateEntityMapper: Mapper<CoordinateEntity, Coordinate> {
     override fun fromEntity(entity: CoordinateEntity): Coordinate {
