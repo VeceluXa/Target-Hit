@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName
 data class LevelEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val targets: List<CoordinateEntity>,
     @SerializedName("is_completed")
     val isCompleted: Boolean = false
 )

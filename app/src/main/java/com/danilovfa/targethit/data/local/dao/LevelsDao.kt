@@ -8,8 +8,6 @@ import com.danilovfa.targethit.data.local.model.LevelEntity
 
 @Dao
 interface LevelsDao {
-    @Query("SELECT * FROM levels WHERE id = :id")
-    suspend fun getLevel(id: Int): LevelEntity
 
     @Query("SELECT * FROM levels")
     suspend fun getLevels(): List<LevelEntity>

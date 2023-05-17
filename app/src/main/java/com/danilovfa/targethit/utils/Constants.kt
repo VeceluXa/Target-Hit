@@ -14,5 +14,7 @@ class Constants {
         const val SCORE_UPDATE_VALUE = 5
         const val DOMAIN_GAME_FIELD_WIDTH = 600
         const val DOMAIN_GAME_FIELD_HEIGHT = 1200
+
+        const val BASE_URL="https://target-hit-f5fc3-default-rtdb.europe-west1.firebasedatabase.app/"
     }
 }

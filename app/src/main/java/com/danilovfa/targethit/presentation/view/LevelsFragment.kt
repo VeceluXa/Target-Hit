@@ -15,6 +15,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentLevelsBinding
 import com.danilovfa.targethit.domain.model.Level
+import com.danilovfa.targethit.domain.model.LevelItem
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
@@ -51,7 +52,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
 
         lifecycleScope.launch(coroutineExceptionHandler) {
-            val levels = mutableListOf<Level>()
+            val levels = mutableListOf<LevelItem>()
             withContext(Dispatchers.IO) {
                 levels += viewModel.getLevels()
             }
@@ -60,7 +61,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
     }
 
-    private fun drawLevels(levels: List<Level>) {
+    private fun drawLevels(levels: List<LevelItem>) {
         setVisibility()
         setAdapter(levels)
     }
@@ -72,7 +73,7 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
         }
     }
 
-    private fun setAdapter(levels: List<Level>) {
+    private fun setAdapter(levels: List<LevelItem>) {
         val myAdapter = LevelsAdapter(requireContext(), levels)
         myAdapter.setOnItemClickListener(this)
         binding.levelsRecyclerView.apply {
