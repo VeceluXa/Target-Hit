@@ -65,5 +65,8 @@
         <argument
             android:name="score"
             app:argType="com.danilovfa.targethit.presentation.model.ScoreArgs" />
+        <action
+            android:id="@+id/action_victoryFragment_to_levelsFragment"
+            app:destination="@id/levelsFragment" />
     </fragment>
 </navigation>

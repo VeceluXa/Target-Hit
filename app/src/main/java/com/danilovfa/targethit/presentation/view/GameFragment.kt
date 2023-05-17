@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -20,7 +19,6 @@ import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
 import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
-import com.danilovfa.targethit.presentation.mapper.ScoreArgsMapper
 import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.viewmodel.GameViewModel
 import com.danilovfa.targethit.utils.Constants.Companion.STOPWATCH_UPDATE_TIME
@@ -65,7 +63,7 @@ class GameFragment : Fragment() {
             setError(exception.message)
         }
 
-        lifecycleScope.launch() {
+        lifecycleScope.launch(coroutineExceptionHandler) {
             var level: Level?
             withContext(Dispatchers.IO) {
                 level = viewModel.getLevel(args.level)
@@ -116,6 +114,7 @@ class GameFragment : Fragment() {
                 coordinateArgsMapper.fromDomain(coordinate)
             }
         ))
+        Log.d(TAG, "finishGame: $action")
         findNavController().navigate(action)
     }
 

@@ -6,4 +6,8 @@
     <string name="levels_item_text">Level</string>
     <string name="levels_error_default">An error occurred while retrieving levels. Please try again.</string>
     <string name="display_time">%s.%s</string>
+    <string name="victory_score">Total score: %d</string>
+    <string name="victory_error_default">An error occurred while saving game data.</string>
+    <string name="ok">OK</string>
+    <string name="victory">Victory!</string>
 </resources>
