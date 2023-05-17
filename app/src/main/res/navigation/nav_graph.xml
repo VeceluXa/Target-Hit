@@ -67,6 +67,8 @@
             app:argType="com.danilovfa.targethit.presentation.model.ScoreArgs" />
         <action
             android:id="@+id/action_victoryFragment_to_levelsFragment"
-            app:destination="@id/levelsFragment" />
+            app:destination="@id/levelsFragment"
+            app:popUpTo="@id/levelsFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
