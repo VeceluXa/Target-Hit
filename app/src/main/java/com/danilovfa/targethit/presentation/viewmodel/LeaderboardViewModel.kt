@@ -10,7 +10,7 @@ import javax.inject.Inject
 class LeaderboardViewModel @Inject constructor(
     private val getLeaderboardUseCase: GetLeaderboardUseCase
 ): ViewModel() {
-    suspend fun getLeaderboard(): List<Score> {
-        return getLeaderboardUseCase.execute()
+    suspend fun getLeaderboard(id: Int): List<Score> {
+        return getLeaderboardUseCase.execute(id)
     }
 }

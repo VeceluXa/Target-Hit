@@ -10,4 +10,8 @@
     <string name="victory_error_default">An error occurred while saving game data.</string>
     <string name="ok">OK</string>
     <string name="victory">Victory!</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboard_error_default">An error occured while retrieving leaderboard.</string>
+    <string name="leaderboard_error_no_items">There are currently no records for this level.</string>
+    <string name="leaderboard_item_id">%d.</string>
 </resources>
