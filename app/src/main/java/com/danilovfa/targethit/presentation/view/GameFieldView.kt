@@ -21,15 +21,20 @@ import com.danilovfa.targethit.utils.Constants.Companion.TARGET_SIZE_DP
 class GameFieldView(context: Context): View(context), SensorEventListener {
     var target: Coordinate? = null
 
-    var crosshairX = width / 2
+    var crosshairX = 0
         private set
-    var crosshairY = height / 2
+    var crosshairY = 0
         private set
 
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
     private var lastUpdateMilliseconds = System.currentTimeMillis()
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        crosshairX = width / 2
+        crosshairY = height / 2
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -39,7 +44,6 @@ class GameFieldView(context: Context): View(context), SensorEventListener {
 
         drawCrosshair(canvas, crosshairX, crosshairY)
     }
-
 
     fun updateTarget(coordinate: Coordinate?) {
         target = coordinate
