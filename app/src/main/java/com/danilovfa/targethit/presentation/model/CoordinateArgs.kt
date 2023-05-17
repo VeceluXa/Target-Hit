@@ -1,9 +1,11 @@
 package com.danilovfa.targethit.presentation.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class CoordinateArgs(
     val x: Int,
     val y: Int,
     val t: Int
-): Serializable
+): Parcelable
