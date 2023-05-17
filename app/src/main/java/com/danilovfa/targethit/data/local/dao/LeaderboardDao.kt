@@ -13,6 +13,6 @@ import com.danilovfa.targethit.utils.Constants.Companion.LEADERBOARD_SIZE
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun setScore(score: ScoreEntity)
 
-        @Query("SELECT * FROM leaderboard ORDER BY score DESC LIMIT $LEADERBOARD_SIZE")
-        suspend fun getTopScores(): List<ScoreEntity>
+        @Query("SELECT * FROM leaderboard WHERE levelId = :id ORDER BY score DESC LIMIT $LEADERBOARD_SIZE")
+        suspend fun getTopScores(id: Int): List<ScoreEntity>
     }

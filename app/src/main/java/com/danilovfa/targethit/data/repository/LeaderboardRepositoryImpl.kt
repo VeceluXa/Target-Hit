@@ -13,8 +13,8 @@ class LeaderboardRepositoryImpl @Inject constructor(
         leaderboardDao.setScore(scoreEntityMapper.fromDomain(score))
     }
 
-    override suspend fun getLeaderboard(): List<Score> {
-        return leaderboardDao.getTopScores().map { scoreEntity ->
+    override suspend fun getLeaderboard(id: Int): List<Score> {
+        return leaderboardDao.getTopScores(id).map { scoreEntity ->
             scoreEntityMapper.fromEntity(scoreEntity)
         }
     }

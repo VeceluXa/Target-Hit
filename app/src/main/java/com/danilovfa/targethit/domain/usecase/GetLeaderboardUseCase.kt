@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetLeaderboardUseCase @Inject constructor(
     private val leaderboardRepository: LeaderboardRepository) {
-    suspend fun execute(): List<Score> {
-        return leaderboardRepository.getLeaderboard()
+    suspend fun execute(id: Int): List<Score> {
+        return leaderboardRepository.getLeaderboard(id)
     }
 }

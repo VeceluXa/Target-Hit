@@ -5,10 +5,10 @@ import com.danilovfa.targethit.domain.model.Score
 import com.danilovfa.targethit.utils.Mapper
 
 class ScoreEntityMapper: Mapper<ScoreEntity, Score> {
-    val coordinateEntityMapper = CoordinateEntityMapper()
+    private val coordinateEntityMapper = CoordinateEntityMapper()
     override fun fromEntity(entity: ScoreEntity): Score {
         return Score(
-            levelId = entity.id,
+            levelId = entity.levelId,
             score = entity.score,
             date = entity.date,
             log = entity.log.map { coordinateEntity ->
@@ -19,7 +19,7 @@ class ScoreEntityMapper: Mapper<ScoreEntity, Score> {
 
     override fun fromDomain(domain: Score): ScoreEntity {
         return ScoreEntity(
-            id = domain.levelId,
+            levelId = domain.levelId,
             score = domain.score,
             date = domain.date,
             log = domain.log.map { coordinate ->

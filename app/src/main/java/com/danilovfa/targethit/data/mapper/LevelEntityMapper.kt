@@ -5,7 +5,7 @@ import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.utils.Mapper
 
 class LevelEntityMapper: Mapper<LevelEntity, Level> {
-    val coordinateMapper = CoordinateEntityMapper()
+    private val coordinateMapper = CoordinateEntityMapper()
     override fun fromEntity(entity: LevelEntity): Level {
         val targets = entity.targets.map { coordinateEntity ->
             coordinateMapper.fromEntity(coordinateEntity)

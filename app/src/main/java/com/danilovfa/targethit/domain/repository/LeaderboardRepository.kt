@@ -4,5 +4,5 @@ import com.danilovfa.targethit.domain.model.Score
 
 interface LeaderboardRepository {
     suspend fun setScore(score: Score)
-    suspend fun getLeaderboard(): List<Score>
+    suspend fun getLeaderboard(id: Int): List<Score>
 }
