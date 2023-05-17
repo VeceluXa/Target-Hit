@@ -27,7 +27,7 @@ class LevelRepositoryImpl @Inject constructor(
         val levelsInDb = levelsDao.getLevels()
 
         if (levelsDao.getLevels().size < amount) {
-            for (i in levelsInDb.size..amount - levelsInDb.size) {
+            for (i in levelsInDb.size until amount - levelsInDb.size) {
                 levelsDao.addRow(LevelEntity(i, false))
             }
         }
