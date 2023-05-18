@@ -30,6 +30,9 @@
         <argument
             android:name="destination"
             app:argType="com.danilovfa.targethit.presentation.model.LevelDestinations" />
+        <action
+            android:id="@+id/action_levelsFragment_to_customLevelFragment"
+            app:destination="@id/customLevelFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -38,7 +41,13 @@
         tools:layout="@layout/fragment_game" >
         <argument
             android:name="level"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="targetsCustom"
+            app:argType="com.danilovfa.targethit.presentation.model.CoordinateArgs[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_gameFragment_to_victoryFragment"
             app:destination="@id/victoryFragment" />
@@ -70,5 +79,14 @@
             app:destination="@id/levelsFragment"
             app:popUpTo="@id/levelsFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/customLevelFragment"
+        android:name="com.danilovfa.targethit.presentation.view.CustomLevelFragment"
+        android:label="fragment_custom_level"
+        tools:layout="@layout/fragment_custom_level" >
+        <action
+            android:id="@+id/action_customLevelFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
 </navigation>

@@ -19,6 +19,7 @@ import com.danilovfa.targethit.domain.model.LevelItem
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
+import com.danilovfa.targethit.utils.TAG
 import com.danilovfa.targethit.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -29,13 +30,9 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
 
-    // TODO Add distinctions between completed levels and not
-
     private val binding: FragmentLevelsBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: LevelsViewModel by viewModels()
     private val args: LevelsFragmentArgs by navArgs()
-
-    private val TAG = "Levels"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +44,13 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (args.destination == LevelDestinations.GAME) {
+            binding.buttonLevelCustom.apply {
+                visibility = View.VISIBLE
+                setOnClickListener { navigateToCustom() }
+            }
+        }
+
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
             setError(exception.message)
         }
@@ -56,7 +60,6 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
             withContext(Dispatchers.IO) {
                 levels += viewModel.getLevels()
             }
-            Log.d(TAG, "getLevels: $levels")
             drawLevels(levels)
         }
     }
@@ -92,16 +95,20 @@ class LevelsFragment : Fragment(), LevelsAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(id: Int) {
-        Log.d(TAG, "onItemClick: $id")
         navigate(id)
     }
 
     private fun navigate(id: Int) {
         val action = if (args.destination == LevelDestinations.GAME)
-            LevelsFragmentDirections.actionLevelsFragmentToGameFragment(id)
+            LevelsFragmentDirections.actionLevelsFragmentToGameFragment(level = id)
         else
-            LevelsFragmentDirections.actionLevelsFragmentToLeaderboardFragment(id)
+            LevelsFragmentDirections.actionLevelsFragmentToLeaderboardFragment(level = id)
 
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToCustom() {
+        val action = LevelsFragmentDirections.actionLevelsFragmentToCustomLevelFragment()
         findNavController().navigate(action)
     }
 }

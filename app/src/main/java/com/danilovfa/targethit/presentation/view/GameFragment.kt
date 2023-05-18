@@ -37,7 +37,7 @@ class GameFragment : Fragment() {
     private val viewModel: GameViewModel by viewModels()
     private val args: GameFragmentArgs by navArgs()
     private lateinit var gameFieldView: GameFieldView
-    private val targets = mutableListOf<Coordinate>()
+    private var targets = mutableListOf<Coordinate>()
 
     private val scoreObserver = Observer<Int> { score ->
         updateScore(score)
@@ -58,7 +58,6 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
             setError(exception.message)
         }
