@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentMenuBinding
 import com.danilovfa.targethit.presentation.model.LevelDestinations
+import com.danilovfa.targethit.presentation.view.MenuFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,12 +37,14 @@ class MenuFragment : Fragment() {
     }
 
     private fun onButtonStart() {
-        val action = MenuFragmentDirections.actionMenuFragmentToLevelsFragment(LevelDestinations.GAME)
+        val action =
+            MenuFragmentDirections.actionMenuFragmentToLevelsFragment(LevelDestinations.GAME)
         findNavController().navigate(action)
     }
 
     private fun onButtonLeaderboard() {
-        val action = MenuFragmentDirections.actionMenuFragmentToLevelsFragment(LevelDestinations.LEADERBOARD)
+        val action =
+            MenuFragmentDirections.actionMenuFragmentToLevelsFragment(LevelDestinations.LEADERBOARD)
         findNavController().navigate(action)
     }
 

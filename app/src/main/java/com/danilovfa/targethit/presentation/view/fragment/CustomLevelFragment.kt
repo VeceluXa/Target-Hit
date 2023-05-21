@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -17,6 +17,7 @@ import com.danilovfa.targethit.databinding.FragmentCustomLevelBinding
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.presentation.adapter.CustomLevelAdapter
 import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
+import com.danilovfa.targethit.presentation.view.CustomLevelFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.CustomLevelViewModel
 import com.danilovfa.targethit.utils.Constants.Companion.DOMAIN_GAME_FIELD_HEIGHT
 import com.danilovfa.targethit.utils.Constants.Companion.DOMAIN_GAME_FIELD_WIDTH

@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.field
 
 import android.content.Context
 import android.graphics.BitmapFactory

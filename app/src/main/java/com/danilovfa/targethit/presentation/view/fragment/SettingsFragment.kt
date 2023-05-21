@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

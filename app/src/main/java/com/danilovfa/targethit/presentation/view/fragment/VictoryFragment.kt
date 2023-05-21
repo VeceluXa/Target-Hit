@@ -1,4 +1,4 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +16,8 @@ import com.danilovfa.targethit.databinding.FragmentVictoryBinding
 import com.danilovfa.targethit.domain.model.Score
 import com.danilovfa.targethit.presentation.mapper.ScoreArgsMapper
 import com.danilovfa.targethit.presentation.model.LevelDestinations
+import com.danilovfa.targethit.presentation.view.VictoryFragmentArgs
+import com.danilovfa.targethit.presentation.view.VictoryFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.VictoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -84,7 +86,8 @@ class VictoryFragment : Fragment() {
     }
 
     private fun navigateToLevels() {
-        val action = VictoryFragmentDirections.actionVictoryFragmentToLevelsFragment(LevelDestinations.GAME)
+        val action =
+            VictoryFragmentDirections.actionVictoryFragmentToLevelsFragment(LevelDestinations.GAME)
         findNavController().navigate(action)
     }
 }

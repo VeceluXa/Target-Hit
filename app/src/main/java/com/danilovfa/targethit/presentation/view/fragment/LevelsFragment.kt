@@ -1,7 +1,6 @@
-package com.danilovfa.targethit.presentation.view
+package com.danilovfa.targethit.presentation.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -14,13 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.targethit.databinding.FragmentLevelsBinding
-import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.model.LevelItem
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
+import com.danilovfa.targethit.presentation.view.LevelsFragmentArgs
+import com.danilovfa.targethit.presentation.view.LevelsFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
-import com.danilovfa.targethit.utils.TAG
-import com.danilovfa.targethit.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
