@@ -60,6 +60,9 @@
         <argument
             android:name="level"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_leaderboardFragment_to_replayFragment"
+            app:destination="@id/replayFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -92,5 +95,14 @@
         <action
             android:id="@+id/action_customLevelFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/replayFragment"
+        android:name="com.danilovfa.targethit.presentation.view.ReplayFragment"
+        android:label="fragment_replay"
+        tools:layout="@layout/fragment_replay" >
+        <argument
+            android:name="scoreDate"
+            app:argType="string" />
     </fragment>
 </navigation>
