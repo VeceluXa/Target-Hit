@@ -18,4 +18,9 @@ class LeaderboardRepositoryImpl @Inject constructor(
             scoreEntityMapper.fromEntity(scoreEntity)
         }
     }
+
+    override suspend fun getScore(date: String): Score {
+        val scoreEntity = leaderboardDao.getScore(date)
+        return scoreEntityMapper.fromEntity(scoreEntity)
+    }
 }

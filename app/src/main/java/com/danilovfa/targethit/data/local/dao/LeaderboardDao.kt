@@ -15,4 +15,7 @@ import com.danilovfa.targethit.utils.Constants.Companion.LEADERBOARD_SIZE
 
         @Query("SELECT * FROM leaderboard WHERE levelId = :id ORDER BY score DESC LIMIT $LEADERBOARD_SIZE")
         suspend fun getTopScores(id: Int): List<ScoreEntity>
+
+        @Query("SELECT * FROM leaderboard WHERE date = :date")
+        suspend fun getScore(date: String): ScoreEntity
     }
