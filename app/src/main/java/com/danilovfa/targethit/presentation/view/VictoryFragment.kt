@@ -44,12 +44,15 @@ class VictoryFragment : Fragment() {
         binding.apply {
             textVictoryScore.text = resources.getString(R.string.victory_score, score.score)
             buttonVictory.setOnClickListener {
-                onButtonClick(score)
+                if (!args.isCustom)
+                    saveScore(score)
+                else
+                    navigateToLevels()
             }
         }
     }
 
-    private fun onButtonClick(score: Score) {
+    private fun saveScore(score: Score) {
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
             val message = exception.message ?: resources.getString(R.string.victory_error_default)
             setError(message)

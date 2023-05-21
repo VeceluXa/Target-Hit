@@ -32,7 +32,7 @@ class LeaderboardAdapter(private val context: Context, private val leaderboard: 
 
         fun bind(id: Int) {
             binding.apply {
-                scoreIndex.text = context.resources.getString(R.string.leaderboard_item_id, id + 1)
+                scoreIndex.text = context.resources.getString(R.string.item_id, id + 1)
                 textLeaderboardScore.text = leaderboard[id].score.toString()
                 textLeaderboardDate.text = leaderboard[id].date
                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))

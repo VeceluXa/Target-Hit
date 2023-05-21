@@ -1,7 +1,7 @@
 package com.danilovfa.targethit.domain.model
 
 data class Coordinate(
-    val x: Int,
-    val y: Int,
-    val t: Int
+    var x: Int,
+    var y: Int,
+    var t: Int
 )

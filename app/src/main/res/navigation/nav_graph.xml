@@ -79,6 +79,10 @@
             app:destination="@id/levelsFragment"
             app:popUpTo="@id/levelsFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="isCustom"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/customLevelFragment"

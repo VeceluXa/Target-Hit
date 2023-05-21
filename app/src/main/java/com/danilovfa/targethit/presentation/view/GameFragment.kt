@@ -58,6 +58,19 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.targetsCustom != null) {
+            val argsMapper = CoordinateArgsMapper()
+            targets = args.targetsCustom!!.map {  coordinateArgs ->
+                argsMapper.fromEntity(coordinateArgs)
+            }.toMutableList()
+            startGame()
+        } else
+            retrieveTargets()
+
+    }
+
+    private fun retrieveTargets() {
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
             setError(exception.message)
         }
@@ -103,17 +116,22 @@ class GameFragment : Fragment() {
     private fun finishGame() {
         stopObservers()
         viewModel.finishGame()
-        Log.d(TAG, "finishGame")
+
         val coordinateArgsMapper = CoordinateArgsMapper()
-        val action = GameFragmentDirections.actionGameFragmentToVictoryFragment(ScoreArgs(
+        val scoreArgs = ScoreArgs(
             levelId = args.level,
             score = viewModel.score.value ?: 0,
             date = LocalDateTime.now().toString(),
             log = viewModel.gameLog.map { coordinate ->
                 coordinateArgsMapper.fromDomain(coordinate)
             }
-        ))
-        Log.d(TAG, "finishGame: $action")
+        )
+
+        val action = GameFragmentDirections.actionGameFragmentToVictoryFragment(
+            score = scoreArgs,
+            isCustom = args.targetsCustom != null
+        )
+
         findNavController().navigate(action)
     }
 
