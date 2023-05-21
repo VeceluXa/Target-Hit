@@ -16,6 +16,7 @@ class LeaderboardAdapter(private val context: Context, private val leaderboard: 
     RecyclerView.Adapter<ScoreViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
+    private var onItemClickListener: LeaderboardAdapter.OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreViewHolder {
         return ScoreViewHolder(layoutInflater.inflate(R.layout.leaderboard_item, parent, false))
@@ -36,7 +37,18 @@ class LeaderboardAdapter(private val context: Context, private val leaderboard: 
                 textLeaderboardScore.text = leaderboard[id].score.toString()
                 textLeaderboardDate.text = leaderboard[id].date
                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                scoreItemLayout.setOnClickListener {
+                    onItemClickListener?.onItemClick(id)
+                }
             }
         }
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(id: Int)
     }
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -24,11 +25,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class LeaderboardFragment : Fragment() {
+class LeaderboardFragment : Fragment(), LeaderboardAdapter.OnItemClickListener {
 
     private val binding: FragmentLeaderboardBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: LeaderboardViewModel by viewModels()
     private val args: LeaderboardFragmentArgs by navArgs()
+    private val leaderboard = mutableListOf<Score>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,19 +46,24 @@ class LeaderboardFragment : Fragment() {
             setError(exception.message)
         }
 
-        lifecycleScope.launch(coroutineExceptionHandler) {
-            setLoader()
-            val leaderboard = mutableListOf<Score>()
-            withContext(Dispatchers.IO) {
-                leaderboard += viewModel.getLeaderboard(args.level)
-            }
+        // TODO Move coroutine to viewModel
+        if (leaderboard.size == 0) {
+            lifecycleScope.launch(coroutineExceptionHandler) {
+                setLoader()
+                withContext(Dispatchers.IO) {
+                    leaderboard += viewModel.getLeaderboard(args.level)
+                }
 
-            if (leaderboard.size == 0) {
-                setError(resources.getString(R.string.leaderboard_error_no_items))
-            } else {
-                setLeaderboardVisibility()
-                setRecyclerView(leaderboard)
+                if (leaderboard.size == 0) {
+                    setError(resources.getString(R.string.leaderboard_error_no_items))
+                } else {
+                    setLeaderboardVisibility()
+                    setRecyclerView(leaderboard)
+                }
             }
+        } else {
+            setLeaderboardVisibility()
+            setRecyclerView(leaderboard)
         }
     }
 
@@ -85,9 +92,17 @@ class LeaderboardFragment : Fragment() {
 
     private fun setRecyclerView(leaderboard: List<Score>) {
         val myAdapter = LeaderboardAdapter(requireContext(), leaderboard)
+        myAdapter.setOnItemClickListener(this)
         binding.leaderboardRecyclerView.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    override fun onItemClick(id: Int) {
+        val action = LeaderboardFragmentDirections.actionLeaderboardFragmentToReplayFragment(
+            scoreDate = leaderboard[id].date.toString()
+        )
+        findNavController().navigate(action)
     }
 }
