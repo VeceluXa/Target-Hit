@@ -21,8 +21,6 @@ import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
 import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
 import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.view.field.GameFieldView
-import com.danilovfa.targethit.presentation.view.GameFragmentArgs
-import com.danilovfa.targethit.presentation.view.GameFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.GameViewModel
 import com.danilovfa.targethit.utils.Constants.Companion.STOPWATCH_UPDATE_TIME
 import com.danilovfa.targethit.utils.TAG

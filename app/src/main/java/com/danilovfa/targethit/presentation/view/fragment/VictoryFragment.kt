@@ -16,8 +16,6 @@ import com.danilovfa.targethit.databinding.FragmentVictoryBinding
 import com.danilovfa.targethit.domain.model.Score
 import com.danilovfa.targethit.presentation.mapper.ScoreArgsMapper
 import com.danilovfa.targethit.presentation.model.LevelDestinations
-import com.danilovfa.targethit.presentation.view.VictoryFragmentArgs
-import com.danilovfa.targethit.presentation.view.VictoryFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.VictoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler

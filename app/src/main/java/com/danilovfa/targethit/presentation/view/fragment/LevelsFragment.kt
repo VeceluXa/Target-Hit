@@ -16,8 +16,6 @@ import com.danilovfa.targethit.databinding.FragmentLevelsBinding
 import com.danilovfa.targethit.domain.model.LevelItem
 import com.danilovfa.targethit.presentation.adapter.LevelsAdapter
 import com.danilovfa.targethit.presentation.model.LevelDestinations
-import com.danilovfa.targethit.presentation.view.LevelsFragmentArgs
-import com.danilovfa.targethit.presentation.view.LevelsFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.LevelsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler

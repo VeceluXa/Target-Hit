@@ -16,8 +16,6 @@ import com.danilovfa.targethit.R
 import com.danilovfa.targethit.databinding.FragmentLeaderboardBinding
 import com.danilovfa.targethit.domain.model.Score
 import com.danilovfa.targethit.presentation.adapter.LeaderboardAdapter
-import com.danilovfa.targethit.presentation.view.LeaderboardFragmentArgs
-import com.danilovfa.targethit.presentation.view.LeaderboardFragmentDirections
 import com.danilovfa.targethit.presentation.viewmodel.LeaderboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
