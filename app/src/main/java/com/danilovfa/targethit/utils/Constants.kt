@@ -6,7 +6,7 @@ class Constants {
         const val FPS = 120
         // Can only be dividable by 10. Less than or equal to 1000
         // i.e. 1, 10, 100, 1000
-        const val STOPWATCH_UPDATE_TIME = 10
+        const val STOPWATCH_UPDATE_TIME = 100
         const val TARGET_SIZE_DP = 100
         const val CROSSHAIR_SIZE_DP = 50
         const val CROSSHAIR_SPEED = 5

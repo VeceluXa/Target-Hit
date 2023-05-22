@@ -100,7 +100,8 @@ class LeaderboardFragment : Fragment(), LeaderboardAdapter.OnItemClickListener {
 
     override fun onItemClick(id: Int) {
         val action = LeaderboardFragmentDirections.actionLeaderboardFragmentToReplayFragment(
-            scoreDate = leaderboard[id].date.toString()
+            scoreDate = leaderboard[id].date.toString(),
+            levelId = args.level
         )
         findNavController().navigate(action)
     }

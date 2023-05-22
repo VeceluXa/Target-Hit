@@ -85,7 +85,7 @@ class VictoryFragment : Fragment() {
 
     private fun navigateToLevels() {
         val action =
-            VictoryFragmentDirections.actionVictoryFragmentToLevelsFragment(LevelDestinations.GAME)
+            VictoryFragmentDirections.actionVictoryFragmentToLevelsFragment(args.destination)
         findNavController().navigate(action)
     }
 }
