@@ -76,7 +76,7 @@ class GameFragment : Fragment() {
             setError(exception.message)
         }
 
-        lifecycleScope.launch() {
+        lifecycleScope.launch(coroutineExceptionHandler) {
             var level: Level?
             withContext(Dispatchers.IO) {
                 level = viewModel.getLevel(args.level)

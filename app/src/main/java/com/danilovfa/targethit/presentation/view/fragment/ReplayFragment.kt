@@ -70,7 +70,7 @@ class ReplayFragment : Fragment() {
             setError(exception.message)
         }
 
-        lifecycleScope.launch() {
+        lifecycleScope.launch(coroutineExceptionHandler) {
             var score: Score?
             var level: Level?
             withContext(Dispatchers.IO) {
