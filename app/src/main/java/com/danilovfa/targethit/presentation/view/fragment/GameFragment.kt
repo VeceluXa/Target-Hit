@@ -18,7 +18,7 @@ import com.danilovfa.targethit.databinding.FragmentGameBinding
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
-import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
+import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.view.field.GameFieldView
 import com.danilovfa.targethit.presentation.viewmodel.GameViewModel
@@ -76,7 +76,7 @@ class GameFragment : Fragment() {
             setError(exception.message)
         }
 
-        lifecycleScope.launch(coroutineExceptionHandler) {
+        lifecycleScope.launch() {
             var level: Level?
             withContext(Dispatchers.IO) {
                 level = viewModel.getLevel(args.level)
@@ -103,15 +103,15 @@ class GameFragment : Fragment() {
     private fun startGame() {
         gameFieldView = GameFieldView(requireContext())
 
-        startObservers()
-        viewModel.startTimer()
-
         binding.apply {
             progressBar.visibility = View.GONE
             textScore.text = "0"
             textTime.text = "0.00"
             gameFieldLayout.addView(gameFieldView)
         }
+
+        viewModel.startTimer()
+        startObservers()
     }
 
     private fun finishGame() {
@@ -130,7 +130,8 @@ class GameFragment : Fragment() {
 
         val action = GameFragmentDirections.actionGameFragmentToVictoryFragment(
             score = scoreArgs,
-            isCustom = args.targetsCustom != null
+            isCustom = args.targetsCustom != null,
+            destination = LevelDestinations.GAME
         )
 
         findNavController().navigate(action)
@@ -151,25 +152,20 @@ class GameFragment : Fragment() {
     }
 
     private fun updateLog(milliseconds: Long) {
-        viewModel.updateLog(
-            Coordinate(
-                x = binding.gameFieldLayout.x.toInt(),
-                y = binding.gameFieldLayout.y.toInt(),
-                t = milliseconds.toInt()
-            )
+        if (gameFieldView.width == 0 || gameFieldView.height == 0) return
+
+        val coordinate = Coordinate(
+            x = gameFieldView.crosshairX,
+            y = gameFieldView.crosshairY,
+            t = milliseconds.toInt()
         )
+        viewModel.updateLog(coordinate)
     }
 
     private fun checkTarget(milliseconds: Long) {
         if (gameFieldView.isTargetHit()) {
             Log.d(TAG, "startObservers: Hit")
             viewModel.updateScore()
-            val coordinateMapper = CoordinateMapper(gameFieldView.width, gameFieldView.height)
-            viewModel.updateLog(coordinateMapper.fromView(Coordinate(
-                x = gameFieldView.crosshairX,
-                y = gameFieldView.crosshairY,
-                t = milliseconds.toInt()
-            )))
         }
 
         if (targets.size > 1 && milliseconds >= targets[0].t) {
