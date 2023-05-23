@@ -11,7 +11,7 @@ class Constants {
         const val CROSSHAIR_SIZE_DP = 50
         const val CROSSHAIR_SPEED = 5
         const val GAME_FIELD_PADDING_DP = 5
-        const val SCORE_UPDATE_VALUE = 5
+        const val SCORE_UPDATE_VALUE = 10
         const val DOMAIN_GAME_FIELD_WIDTH = 600
         const val DOMAIN_GAME_FIELD_HEIGHT = 1200
 
