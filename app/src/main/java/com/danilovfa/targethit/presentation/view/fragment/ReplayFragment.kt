@@ -18,7 +18,6 @@ import com.danilovfa.targethit.databinding.FragmentReplayBinding
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.model.Score
-import com.danilovfa.targethit.presentation.mapper.CoordinateMapper
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.view.field.ReplayFieldView
@@ -40,6 +39,7 @@ class ReplayFragment : Fragment() {
     private val args: ReplayFragmentArgs by navArgs()
     private lateinit var replayFieldView: ReplayFieldView
     private var targets = mutableListOf<Coordinate>()
+    private lateinit var scoreData: Score
 
     private val scoreObserver = Observer<Int> { score ->
         updateScore(score)
@@ -79,6 +79,7 @@ class ReplayFragment : Fragment() {
             }
 
             if (score != null && level != null) {
+                scoreData = score!!
                 viewModel.crosshairMovements = score!!.log.toMutableList()
                 Log.d(TAG, "retrieveScore: ${viewModel.crosshairMovements}")
                 viewModel.level = level
@@ -119,7 +120,7 @@ class ReplayFragment : Fragment() {
 
         val scoreArgs = ScoreArgs(
             levelId = args.levelId,
-            score = viewModel.score.value ?: 0,
+            score = scoreData.score,
             date = LocalDateTime.now().toString(),
             log = emptyList()
         )
