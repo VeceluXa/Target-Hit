@@ -25,4 +25,6 @@
     <string name="custom_level_error_no_end_time">Select end time.</string>
     <string name="custom_level_error_time_small">Select end time bigger than last target\'s.</string>
     <string name="custom_level_error_wrong_coordinate">Coordinate has unsupported dimensions.</string>
+    <string name="exit">Exit</string>
+    <string name="game_title">Target Hit!</string>
 </resources>

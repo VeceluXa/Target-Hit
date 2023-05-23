@@ -30,7 +30,6 @@ class MenuFragment : Fragment() {
         binding.apply {
             buttonStart.setOnClickListener { onButtonStart() }
             buttonLeaderboard.setOnClickListener { onButtonLeaderboard() }
-            buttonSettings.setOnClickListener { onButtonSettings() }
             buttonExit.setOnClickListener { onButtonExit() }
         }
     }
@@ -44,11 +43,6 @@ class MenuFragment : Fragment() {
     private fun onButtonLeaderboard() {
         val action =
             MenuFragmentDirections.actionMenuFragmentToLevelsFragment(LevelDestinations.LEADERBOARD)
-        findNavController().navigate(action)
-    }
-
-    private fun onButtonSettings() {
-        val action = MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
         findNavController().navigate(action)
     }
 

@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_menuFragment_to_levelsFragment"
             app:destination="@id/levelsFragment" />
-        <action
-            android:id="@+id/action_menuFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/levelsFragment"
@@ -64,11 +61,6 @@
             android:id="@+id/action_leaderboardFragment_to_replayFragment"
             app:destination="@id/replayFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.danilovfa.targethit.presentation.view.fragment.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/victoryFragment"
         android:name="com.danilovfa.targethit.presentation.view.fragment.VictoryFragment"
