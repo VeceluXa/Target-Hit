@@ -79,7 +79,9 @@ class ReplayFragment : BaseGameFragment() {
         val action = ReplayFragmentDirections.actionReplayFragmentToVictoryFragment(
             score = scoreArgs,
             isCustom = true,
-            destination = LevelDestinations.LEADERBOARD
+            destination = LevelDestinations.LEADERBOARD,
+            fieldWidth = fieldView.measuredWidth,
+            fieldHeight = fieldView.measuredHeight
         )
 
         findNavController().navigate(action)

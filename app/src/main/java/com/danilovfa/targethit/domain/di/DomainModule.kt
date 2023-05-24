@@ -55,6 +55,11 @@ class DomainModule {
     }
 
     @Provides
+    fun provideGetImageResults(): GetImageResults {
+        return GetImageResults()
+    }
+
+    @Provides
 //    @Singleton
     fun provideTimeStampProvider(): TimestampProvider {
         return DateTimestampProvider()

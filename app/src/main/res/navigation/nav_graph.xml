@@ -81,6 +81,12 @@
         <argument
             android:name="destination"
             app:argType="com.danilovfa.targethit.presentation.model.LevelDestinations" />
+        <argument
+            android:name="fieldWidth"
+            app:argType="integer" />
+        <argument
+            android:name="fieldHeight"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/customLevelFragment"

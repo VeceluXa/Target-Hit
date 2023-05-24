@@ -82,7 +82,9 @@ class GameFragment : BaseGameFragment() {
         val action = GameFragmentDirections.actionGameFragmentToVictoryFragment(
             score = scoreArgs,
             isCustom = args.targetsCustom != null,
-            destination = LevelDestinations.GAME
+            destination = LevelDestinations.GAME,
+            fieldWidth = fieldView.measuredWidth,
+            fieldHeight = fieldView.measuredHeight
         )
 
         findNavController().navigate(action)
