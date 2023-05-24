@@ -8,22 +8,24 @@ class ImageResults {
         val bitmap = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        val paint = Paint()
-        paint.color = Color.RED
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 10f
+        val paint = Paint().apply {
+            color = Color.RED
+            style = Paint.Style.STROKE
+            strokeWidth = 10f
+        }
 
         val coordinates = score.log
         if (coordinates.isEmpty())
             return bitmap
 
-        val path = Path()
-        path.moveTo(coordinates[0].x.toFloat(), coordinates[0].y.toFloat())
-        for (i in 1 until coordinates.size) {
-            path.lineTo(coordinates[i].x.toFloat(), coordinates[i].y.toFloat())
+        val path = Path().apply {
+            moveTo(coordinates[0].x.toFloat(), coordinates[0].y.toFloat())
+            for (i in 1 until coordinates.size) {
+                lineTo(coordinates[i].x.toFloat(), coordinates[i].y.toFloat())
+            }
+            close()
         }
-        path.close()
-        
+
         canvas.drawPath(path, paint)
 
         return bitmap

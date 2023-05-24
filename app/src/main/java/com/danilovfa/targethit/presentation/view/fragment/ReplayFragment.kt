@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.danilovfa.targethit.domain.model.Coordinate
 import com.danilovfa.targethit.domain.model.Level
 import com.danilovfa.targethit.domain.model.Score
+import com.danilovfa.targethit.presentation.mapper.CoordinateArgsMapper
 import com.danilovfa.targethit.presentation.model.LevelDestinations
 import com.danilovfa.targethit.presentation.model.ScoreArgs
 import com.danilovfa.targethit.presentation.view.field.FieldView
@@ -69,11 +70,15 @@ class ReplayFragment : BaseGameFragment() {
     }
 
     override fun navigateToVictory() {
+        val coordinateMapper = CoordinateArgsMapper()
+
         val scoreArgs = ScoreArgs(
             levelId = args.levelId,
             score = scoreData.score,
             date = LocalDateTime.now().toString(),
-            log = emptyList()
+            log = scoreData.log.map { coordinate ->
+                coordinateMapper.fromDomain(coordinate)
+            }
         )
 
         val action = ReplayFragmentDirections.actionReplayFragmentToVictoryFragment(

@@ -27,4 +27,5 @@
     <string name="custom_level_error_wrong_coordinate">Coordinate has unsupported dimensions.</string>
     <string name="exit">Exit</string>
     <string name="game_title">Target Hit!</string>
+    <string name="share_text">I completed a level in Target Hit! I scored %d points!</string>
 </resources>

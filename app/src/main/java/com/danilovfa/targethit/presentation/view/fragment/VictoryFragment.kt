@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,7 +27,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -38,10 +38,6 @@ class VictoryFragment : Fragment() {
     private val binding: FragmentVictoryBinding by viewBinding(CreateMethod.INFLATE)
     private val viewModel: VictoryViewModel by viewModels()
     private val args: VictoryFragmentArgs by navArgs()
-
-    // TODO Add path image sharing
-    // TODO Share button that starts sharing intent
-    // TODO Image contains path of our crosshair
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +53,7 @@ class VictoryFragment : Fragment() {
         binding.apply {
             textVictoryScore.text = resources.getString(R.string.victory_score, score.score)
             buttonVictory.setOnClickListener {
-                if (!args.isCustom)
-                    saveScore(score)
-                else
-                    navigateToLevels()
+                onVictoryClick(score)
             }
             buttonShare.setOnClickListener {
                 shareResults(score)
@@ -68,22 +61,24 @@ class VictoryFragment : Fragment() {
         }
     }
 
+    private fun onVictoryClick(score: Score) {
+        if (!args.isCustom)
+            saveScore(score)
+        else
+            navigateToLevels()
+    }
+
 
     // Function to save a bitmap to a temporary file and get its URI
     private fun saveBitmapToFile(bitmap: Bitmap): Uri? {
         try {
-            val imagesFolder = File(requireContext().cacheDir, "images")
+            val imagesFolder = File(requireContext().getExternalFilesDir(null), "images")
             imagesFolder.mkdirs()
             val file = File(imagesFolder, "image_results.png")
             val outputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             outputStream.flush()
             outputStream.close()
-
-//            val cachePath = File.createTempFile("image", "png", requireContext().cacheDir)
-//            val outputStream = FileOutputStream(cachePath)
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-//            outputStream.close()
             return FileProvider.getUriForFile(requireContext(), "com.danilovfa.targethit.fileprovider", file)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -94,11 +89,14 @@ class VictoryFragment : Fragment() {
     private fun shareResults(score: Score) {
         val image = viewModel.getImageResults(score, args.fieldWidth, args.fieldHeight)
         val imageUri = saveBitmapToFile(image)
+        val text = resources.getString(R.string.share_text, score.score)
         if (imageUri != null) {
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "image/png"
-            intent.putExtra(Intent.EXTRA_STREAM, imageUri)
-            startActivity(Intent.createChooser(intent, "Share"))
+            ShareCompat.IntentBuilder(requireContext())
+                .setType("image/*")
+                .setSubject(text)
+                .addStream(imageUri)
+                .setChooserTitle("Share score")
+                .startChooser()
         }
     }
 
