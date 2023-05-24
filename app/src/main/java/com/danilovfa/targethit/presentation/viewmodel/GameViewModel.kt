@@ -32,7 +32,7 @@ class GameViewModel @Inject constructor(
         return getLevelByIdUseCase.execute(id)
     }
 
-    fun finishGame() {
+    fun stopTimer() {
         startStopwatchUseCase.execute().removeObserver(timeObserver)
         pauseStopWatchUseCase.execute()
     }

@@ -41,7 +41,7 @@ class ReplayViewModel @Inject constructor(
         _score.value = score.value!! + Constants.SCORE_UPDATE_VALUE
     }
 
-    fun finishGame() {
+    fun stopTimer() {
         startStopwatchUseCase.execute().removeObserver(timeObserver)
     }
 
